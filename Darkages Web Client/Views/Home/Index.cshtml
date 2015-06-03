@@ -1,17 +1,65 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@{Ajax.BeginForm(
-                       "GetTicks",
-                       "Home",
-                       new AjaxOptions
-                       {
-                           HttpMethod = "POST", //do a http POST
-                           InsertionMode = InsertionMode.Replace, //replace our current time
-                           UpdateTargetId = "TimeNow", //Target Div Id
-                       }
-                    );
-}
+
 <div id="TimeNow">
     <p>To be replaced</p>
 </div>
+
+   
+<script type="text/javascript">
+    /* $(document).ready(function () {
+
+         $.ajax({
+             type: "POST",
+             url: "Home/GetData",
+             contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             success: function (response) {
+
+                 alert(names);
+             },
+             failure: function (response) {
+                 alert(response.d);
+             }
+         });
+     });*/
+
+    /*$(document).ready(function () {
+        $.ajax({
+            url: 'Url.Action("GetTicks", "Home")',
+     //       contentType: "application/json; charset=utf-8",
+      //      dataType: "json",
+      //      success: successFunc,
+      //      error: errorFunc
+      //  });
+
+        function successFunc(data, status) {
+            $("#TimeNow").Text(response.d);
+        }
+
+        function errorFunc() {
+            alert('error');
+        }
+        });*/
+   
+        (function poll() {
+            $.ajax({
+                url: '@Url.Action("GetTicks", "Home")',
+                type: "GET",
+                dataType: "json",
+                complete: poll,
+                success: function (data) {
+                    $('#TimeNow').html(data).fadeIn();
+                    alert("Hello");
+                    //Do whatever here, just a poor mans example
+                },
+                error: function () {
+                    $('#TimeNow').html('Boo').fadeIn();
+                }
+            });
+        })();
+</script>
+
+
+

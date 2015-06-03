@@ -38,6 +38,12 @@ namespace Darkages_Web_Client.Controllers
             return View();
         }
 
+        [HttpPost,ActionName("GetTicks")]
+        public ActionResult GetTicksAction()
+        {
+            return Json(DateTime.Now.Ticks, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetTicks()
         {
             ViewBag.timenow = DateTime.Now;
