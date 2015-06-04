@@ -2,11 +2,11 @@
     ViewBag.Title = "Home Page";
 }
 
+
 <div id="TimeNow">
     <p>To be replaced</p>
 </div>
 
-   
 <script type="text/javascript">
     /* $(document).ready(function () {
 
@@ -42,23 +42,24 @@
             alert('error');
         }
         });*/
-   
+    $(document).ready(function () {
         (function poll() {
             $.ajax({
-                url: '@Url.Action("GetTicks", "Home")',
+                url: "@Url.Action("GetTicks", "Home")",
                 type: "GET",
                 dataType: "json",
                 complete: poll,
                 success: function (data) {
                     $('#TimeNow').html(data).fadeIn();
-                    alert("Hello");
+                   // alert("Hello");
                     //Do whatever here, just a poor mans example
                 },
                 error: function () {
                     $('#TimeNow').html('Boo').fadeIn();
                 }
             });
-        })();
+        })()
+    });
 </script>
 
 

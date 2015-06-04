@@ -44,10 +44,32 @@ namespace Darkages_Web_Client.Controllers
             return Json(DateTime.Now.Ticks, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public JsonResult GetTicks()
         {
             ViewBag.timenow = DateTime.Now;
             return Json(DateTime.Now.Ticks, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult IndexRefresh()
+        {
+            var cache = HttpRuntime.Cache["Tasks"];
+            if (cache == null)
+            {
+                return Json(new
+                {
+                    success = false,
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    success = true,
+                    // View = this.Re
+                });
+            }
+
         }
     }
 }
